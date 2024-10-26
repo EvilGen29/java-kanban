@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Manager {
-    Integer id = 0;
+   private Integer id = 0;
 
     HashMap<Integer, Task> tasks = new HashMap<>();
     HashMap<Integer, Epic> epics = new HashMap<>();
@@ -14,7 +14,7 @@ public class Manager {
     }
 
 
-    public void epicStatus(Epic epic) {
+    private void epicStatus(Epic epic) {
         if (epic.getSubtaskId().isEmpty()) {
             epic.setStatus(StatusOfTask.NEW);
             return;
@@ -66,6 +66,7 @@ public class Manager {
         subtask.setId(id);
         subtasks.put(id, subtask);
         epic.getSubtaskId().add(id);
+        epicStatus(epic);
         return id;
     }
 

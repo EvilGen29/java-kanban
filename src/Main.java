@@ -17,7 +17,7 @@ public class Main {
         int epic2Id = manager.addEpic(epic2);
 
         Subtask epic1subtask1 = new Subtask(0, "Ep1S1", StatusOfTask.NEW , "", epic1Id);
-        Subtask epic1subtask2 = new Subtask(0, "Ep1S2", StatusOfTask.NEW , "", epic1Id);
+        Subtask epic1subtask2 = new Subtask(0, "Ep1S2", StatusOfTask.IN_PROGRESS , "", epic1Id);
         Subtask epic2subtask1 = new Subtask(0, "Ep2S1", StatusOfTask.NEW , "", epic2Id);
         int epic1subtask1Id = manager.addSubtask(epic1subtask1);
         int epic1subtask2Id = manager.addSubtask(epic1subtask2);
