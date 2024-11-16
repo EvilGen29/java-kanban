@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskTest {
     TaskManager taskManager = Managers.getDefault();
-    HistoryManager historyManager;
+    HistoryManager historyManager = Managers.getDefaultHistory();
 
     Task t1 = new Task(0,"t1",StatusOfTask.NEW,"d");
     int t1Id = taskManager.addTask(t1);
@@ -66,12 +65,18 @@ class TaskTest {
         String name1 = t2.getName();
         StatusOfTask status1 = t2.getStatus();
         int t2Id = taskManager.addTask(t2);
-        assertEquals(name1, taskManager.getTaskById(t2Id).getName());
-        assertEquals(status1, taskManager.getTaskById(t2Id).getStatus());
-        assertEquals(descr1, taskManager.getTaskById(t2Id).getDescription());
+        assertEquals(name1, taskManager.getTaskById(t2Id).getName() ,"Поле изменилось");
+        assertEquals(status1, taskManager.getTaskById(t2Id).getStatus() ,"Поле изменилось");
+        assertEquals(descr1, taskManager.getTaskById(t2Id).getDescription() ,"Поле изменилось");
     }
 
-
-
+    @Test
+    void HistoryAdd() {
+        historyManager.add(t1);
+        historyManager.add(epic1);
+        final List<Task> history = historyManager.getHistory();
+        assertNotNull(history, "История не пустая.");
+        assertEquals(2, history.size(), "История не пустая.");
+    }
 
 }
