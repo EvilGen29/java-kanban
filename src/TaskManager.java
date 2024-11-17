@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 import java.util.List;
 
     public interface TaskManager {
@@ -17,13 +17,13 @@ import java.util.List;
 
         void updateSubtask(Subtask subtask);
 
-        ArrayList<Task> getTasks();
+        List<Task> getTasks();
 
-        ArrayList<Epic> getEpics();
+        List<Epic> getEpics();
 
-        ArrayList<Subtask> getSubtasks();
+        List<Subtask> getSubtasks();
 
-        ArrayList<Subtask> getSubtasksOfEpic(Epic epic);
+        List<Subtask> getSubtasksOfEpic(Epic epic);
 
         Task getTaskById(Integer id);
 

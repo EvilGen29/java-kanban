@@ -18,7 +18,7 @@ class TaskTest {
     int epic1subtask1Id = taskManager.addSubtask(epic1subtask1);
 
     @Test
-    void TestTaskSavedEqualsByIdSize() {
+    void testTaskSavedEqualsByIdSize() {
         Task taskT1 = taskManager.getTaskById(t1Id);
         final int taskId = taskManager.addTask(taskT1);
 
@@ -35,7 +35,7 @@ class TaskTest {
     }
 
     @Test
-    void TestEpicSavedEqualsByIdSize() {
+    void testEpicSavedEqualsByIdSize() {
         Epic epicT1 = taskManager.getEpicById(epic1Id);
         final int epicId = taskManager.addEpic(epicT1);
 
@@ -50,7 +50,7 @@ class TaskTest {
     }
 
     @Test
-    void FindById() {
+    void findById() {
         assertEquals(taskManager.getTaskById(t1Id),taskManager.getTaskById(1) , "Неверно задан id");
         assertEquals(taskManager.getEpicById(epic1Id),taskManager.getEpicById(2) , "Неверно задан id");
         assertEquals(taskManager.getSubtaskById(epic1subtask1Id),taskManager.getSubtaskById(3) , "Неверно задан id");
@@ -70,7 +70,7 @@ class TaskTest {
     }
 
     @Test
-    void HistoryAdd() {
+    void historyAdd() {
         historyManager.add(t1);
         historyManager.add(epic1);
         final List<Task> history = historyManager.getHistory();
