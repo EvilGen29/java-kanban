@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskTest {
     TaskManager taskManager = Managers.getDefault();
@@ -26,7 +25,7 @@ class TaskTest {
         final Task savedTask = taskManager.getTaskById(taskId);
 
         assertNotNull(savedTask, "Задача не найдена.");
-        assertEquals(taskT1, savedTask, "Задачи не совпадают.");
+        assertEquals(t1, savedTask, "Задачи не совпадают.");
 
         final List<Task> tasks = taskManager.getTasks();
 
@@ -47,7 +46,7 @@ class TaskTest {
         List<Epic> savedEpics = taskManager.getEpics();
         assertNotNull(savedEpics, "Задачи на возвращаются.");
         assertEquals(2, savedEpics.size(), "Неверное количество задач.");
-        assertEquals(epicT1, savedEpics.get(0), "Задачи не совпадают.");
+        assertEquals(epicT1, savedEpics.get(1), "Задачи не совпадают.");
     }
 
     @Test
@@ -78,5 +77,21 @@ class TaskTest {
         assertNotNull(history, "История не пустая.");
         assertEquals(2, history.size(), "История не пустая.");
     }
+
+    //доп
+    @Test
+    public void addHistoryUpdateChange() {
+        int t1Id = taskManager.addTask(t1);
+        taskManager.getTaskById(t1Id);
+        Task task1upd1 = new Task(t1Id, "t1.1",StatusOfTask.DONE, "upd");
+        taskManager.updateTask(task1upd1);
+        taskManager.getTaskById(t1Id);
+        assertEquals(taskManager.getHistory().size(), 2, "В истории менее 2 задач.");
+        assertEquals(taskManager.getHistory().get(0).id,taskManager.getHistory().get(1).id , "id задач разные");
+        assertNotEquals(taskManager.getHistory().get(0).getName(),taskManager.getHistory().get(1).getName() , "Сходятся имена");
+        assertNotEquals(taskManager.getHistory().get(0).getDescription(),taskManager.getHistory().get(1).getDescription(), "Сходятся описания");
+        assertNotEquals(taskManager.getHistory().get(0).getStatus(),taskManager.getHistory().get(1).getStatus(), "Сходятся Статусы");
+    }
+
 
 }

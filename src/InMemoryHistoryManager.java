@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-    private static int historyTasksSize = 10;
+    private static final int historyTasksSize = 10;
     List<Task> historyTasks = new ArrayList<>();
 
     @Override
