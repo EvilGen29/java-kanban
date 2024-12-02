@@ -32,7 +32,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             } else {
                 first.prev = null;
             }
-        } else if (node.next == null){
+        } else if (node.next == null) {
             last = last.prev;
             last.next = null;
         } else {
