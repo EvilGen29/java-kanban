@@ -9,7 +9,7 @@ public class Main {
         System.out.println("1. Этап: ");
         System.out.println("Создадим 2 обычные задачи, 1 эпик с 3 подзадачами и 1 эпик без подзадач:");
         int task1 = taskManager.addTask(new Task(0,"t1",StatusOfTask.NEW,"first"));
-        int task2 =taskManager.addTask(new Task(0,"t2",StatusOfTask.NEW,"second"));
+        int task2 = taskManager.addTask(new Task(0,"t2",StatusOfTask.NEW,"second"));
 
         int epic1 = taskManager.addEpic(new Epic(0,"E1",StatusOfTask.NEW,"",new ArrayList<Integer>()));
         int epic1subtask1 = taskManager.addSubtask(new Subtask(0,"Ep1S1",StatusOfTask.NEW,"",epic1));
