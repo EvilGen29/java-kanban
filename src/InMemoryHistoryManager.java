@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-    Node first;
-    Node last;
+    private Node first;
+    private Node last;
 
     Map<Integer,Node> nodes = new HashMap<>();
 
-    public void linkLast(Task task) {
+    private void linkLast(Task task) {
         Node newNode = new Node(last, task, null);
         if (last == null) {
             first = newNode;
@@ -20,7 +20,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         last = newNode;
     }
 
-    public void removeNode(int id) {
+    private void removeNode(int id) {
         Node node = nodes.remove(id);
         if (node == null) {
             return;
@@ -41,7 +41,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
     }
 
-    public List<Task> getTasks() {
+    private List<Task> getTasks() {
         List<Task> history = new ArrayList<>();
         Node curNode = first;
         while (curNode != null) {

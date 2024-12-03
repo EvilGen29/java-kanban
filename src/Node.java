@@ -1,7 +1,7 @@
 public class Node {
-    public Task task;
-    public Node prev;
-    public Node next;
+    protected Task task;
+    protected Node prev;
+    protected Node next;
 
     public Node(Node prev, Task task, Node next) {
         this.task = task;
