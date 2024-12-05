@@ -8,13 +8,13 @@ class TaskTest {
     TaskManager taskManager = Managers.getDefault();
     HistoryManager historyManager = Managers.getDefaultHistory();
 
-    Task t1 = new Task(0,"t1",StatusOfTask.NEW,"d");
+    Task t1 = new Task(0,"t1", StatusOfTask.NEW,"d");
     int t1Id = taskManager.addTask(t1);
 
-    Epic epic1 = new Epic(0,"E1",StatusOfTask.NEW,"",new ArrayList<Integer>());
+    Epic epic1 = new Epic(0,"E1", StatusOfTask.NEW,"",new ArrayList<Integer>());
     int epic1Id = taskManager.addEpic(epic1);
 
-    Subtask epic1subtask1 = new Subtask(0,"Ep1S1",StatusOfTask.NEW,"",epic1Id);
+    Subtask epic1subtask1 = new Subtask(0,"Ep1S1", StatusOfTask.NEW,"",epic1Id);
     int epic1subtask1Id = taskManager.addSubtask(epic1subtask1);
 
     @Test
@@ -59,7 +59,7 @@ class TaskTest {
     @Test
     void immutabilityTask() {
 
-        Task t2 = new Task(0,"t2",StatusOfTask.NEW,"e");
+        Task t2 = new Task(0,"t2", StatusOfTask.NEW,"e");
         String descr1 = t2.getDescription();
         String name1 = t2.getName();
         StatusOfTask status1 = t2.getStatus();
@@ -78,20 +78,22 @@ class TaskTest {
         assertEquals(2, history.size(), "История не пустая.");
     }
 
-    //доп
     @Test
-    public void addHistoryUpdateChange() {
-        int t1Id = taskManager.addTask(t1);
+    public void taskAddOneTaskWithoutDouble() {
         taskManager.getTaskById(t1Id);
-        Task task1upd1 = new Task(t1Id, "t1.1",StatusOfTask.DONE, "upd");
-        taskManager.updateTask(task1upd1);
         taskManager.getTaskById(t1Id);
-        assertEquals(taskManager.getHistory().size(), 2, "В истории менее 2 задач.");
-        assertEquals(taskManager.getHistory().get(0).id,taskManager.getHistory().get(1).id, "id задач разные");
-        assertNotEquals(taskManager.getHistory().get(0).getName(),taskManager.getHistory().get(1).getName(), "Сходятся имена");
-        assertNotEquals(taskManager.getHistory().get(0).getDescription(),taskManager.getHistory().get(1).getDescription(), "Сходятся описания");
-        assertNotEquals(taskManager.getHistory().get(0).getStatus(),taskManager.getHistory().get(1).getStatus(), "Сходятся Статусы");
+        taskManager.getSubtaskById(epic1subtask1Id);
+        taskManager.getSubtaskById(epic1subtask1Id);
+        taskManager.getEpicById(epic1Id);
+
+        List<Task> history = taskManager.getHistory();
+        assertEquals(t1,history.get(0),"В историю добавилась такая же задача");
+        assertNotEquals(t1,history.get(1),"В историю добавилась такая же задача");
+        assertEquals(epic1subtask1,history.get(1),"В историю добавилась такая же задача");
+        assertNotEquals(epic1subtask1,history.get(2),"В историю добавилась такая же задача");
+        taskManager.delTaskById(t1Id);
+        history = taskManager.getHistory();
+        assertEquals(2, history.size(), "Задача не удалена.");
+
     }
-
-
 }
