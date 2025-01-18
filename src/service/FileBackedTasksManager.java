@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileBackedTasksManager extends InMemoryTaskManager implements TaskManager {
+
     static File file;
+
     public FileBackedTasksManager(File file) {
         this.file = file;
     }
@@ -24,7 +26,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         } catch (IOException e) {
             System.out.println("Произошла ошибка во время записи файла.");
         }
+
     }
+
     String toString(Task task) {
         String taskString;
         taskString = String.format("%s,%s,%s,%s,%s,",
@@ -34,6 +38,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         }
         return taskString;
     }
+
     static String historyToString(HistoryManager manager) {
         StringBuilder historyString = new StringBuilder();
         for (Task task : manager.getHistory()) {
@@ -44,6 +49,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         }
         return historyString.toString();
     }
+
     static Task fromString(String value) {
         Task task = null;
         String[] m = value.split(",");
@@ -58,6 +64,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         }
         return task;
     }
+
     static List<Integer> historyFromString(String value) {
         List<Integer> historyIdList = new ArrayList<>();
         for (String s : value.split(",")) {
@@ -120,76 +127,90 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         save();
         return id;
     }
+
     @Override
     public Integer addEpic(Epic epic) {
         Integer id = super.addEpic(epic);
         save();
         return id;
     }
+
     @Override
     public Integer addSubtask(Subtask subtask) {
         Integer id = super.addSubtask(subtask);
         save();
         return id;
     }
+
     @Override
     public Task getTaskById(Integer id) {
         Task task = super.getTaskById(id);
         save();
         return task;
     }
+
     @Override
     public Epic getEpicById(Integer id) {
         Epic epic = super.getEpicById(id);
         save();
         return epic;
     }
+
     @Override
     public Subtask getSubtaskById(Integer id) {
         Subtask subtask = super.getSubtaskById(id);
         save();
         return subtask;
     }
+
     @Override
     public void updateTask(Task task) {
         save();
         super.updateTask(task);
     }
+
     @Override
     public void updateEpic(Epic epic) {
         save();
         super.updateEpic(epic);
     }
+
     @Override
     public void updateSubtask(Subtask subtask) {
         save();
         super.updateSubtask(subtask);
     }
+
     @Override
     public void delAllTasks() {
         save();
         super.delAllTasks();
     }
+
     @Override
     public void delAllEpics() {
         save();
         super.delAllEpics();
     }
+
     @Override
     public void delAllSubtasks() {
         save();
         super.delAllSubtasks();
     }
+
     @Override
     public void delTaskById(Integer id) {
         save();
         super.delTaskById(id);
     }
+
     @Override
     public void delEpicById(Integer id) {
         save();
         super.delEpicById(id);
     }
+
     @Override
     public void delSubtasksById(Integer id) {
         save();
