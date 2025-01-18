@@ -1,0 +1,9 @@
+1,TASK,firsttask,NEW,gfg,
+2,TASK,secondtask,NEW,fgfg,
+3,EPIC,firstEpic,IN_PROGRESS,gfg,
+4,EPIC,secondEpic,NEW,fdf,
+5,SUBTASK,firstsubforfirstepic,NEW,dssd,3
+6,SUBTASK,secondsubforepic1,IN_PROGRESS,dssd,3
+7,SUBTASK,thirdsubforepic1,IN_PROGRESS,dssd,3
+
+1,2,7

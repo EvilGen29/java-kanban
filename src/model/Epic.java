@@ -1,11 +1,12 @@
+package model;
 
 import java.util.List;
 
 public class Epic extends Task {
     public List<Integer> subtaskId;
 
-    public Epic(Integer id, String name, StatusOfTask status, String description, List<Integer> subtaskId) {
-        super(id, name,status, description);
+    public Epic(Integer id,TypeOfTask type, String name, StatusOfTask status, String description, List<Integer> subtaskId) {
+        super(id,type, name,status, description);
         this.subtaskId = subtaskId;
     }
 
@@ -19,7 +20,7 @@ public class Epic extends Task {
 
     @Override
     public String toString() {
-        return "Epic{" +
+        return "model.Epic{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
