@@ -1,7 +1,4 @@
-import model.Epic;
-import model.StatusOfTask;
-import model.Subtask;
-import model.Task;
+import model.*;
 import org.junit.jupiter.api.Test;
 import service.HistoryManager;
 import service.Managers;
@@ -16,13 +13,13 @@ class TaskTest {
     TaskManager taskManager = Managers.getDefault();
     HistoryManager historyManager = Managers.getDefaultHistory();
 
-    Task t1 = new Task(0,"t1", StatusOfTask.NEW,"d");
+    Task t1 = new Task(0, TypeOfTask.TASK,"t1", StatusOfTask.NEW,"d");
     int t1Id = taskManager.addTask(t1);
 
-    Epic epic1 = new Epic(0,"E1", StatusOfTask.NEW,"",new ArrayList<Integer>());
+    Epic epic1 = new Epic(0,TypeOfTask.EPIC,"E1", StatusOfTask.NEW,"",new ArrayList<Integer>());
     int epic1Id = taskManager.addEpic(epic1);
 
-    Subtask epic1subtask1 = new Subtask(0,"Ep1S1", StatusOfTask.NEW,"",epic1Id);
+    Subtask epic1subtask1 = new Subtask(0,TypeOfTask.SUBTASK,"Ep1S1", StatusOfTask.NEW,"",epic1Id);
     int epic1subtask1Id = taskManager.addSubtask(epic1subtask1);
 
     @Test
@@ -67,7 +64,7 @@ class TaskTest {
     @Test
     void immutabilityTask() {
 
-        Task t2 = new Task(0,"t2", StatusOfTask.NEW,"e");
+        Task t2 = new Task(0,TypeOfTask.TASK,"t2", StatusOfTask.NEW,"e");
         String descr1 = t2.getDescription();
         String name1 = t2.getName();
         StatusOfTask status1 = t2.getStatus();
