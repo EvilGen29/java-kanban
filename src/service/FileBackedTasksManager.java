@@ -1,19 +1,20 @@
 package service;
+import exception.ManagerSaveException;
 import model.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileBackedTasksManager extends InMemoryTaskManager implements TaskManager {
+public class FileBackedTasksManager extends InMemoryTaskManager {
 
-    static File file;
+    File file;
 
     public FileBackedTasksManager(File file) {
         this.file = file;
     }
 
-    void save() {
+    private void save() {
         List<Task> allTask = new ArrayList<>();
         allTask.addAll(getTasks());
         allTask.addAll(getEpics());
@@ -24,12 +25,12 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
             }
             fileWriter.write("\n" + historyToString(historyManager));
         } catch (IOException e) {
-            System.out.println("Произошла ошибка во время записи файла.");
+            throw new ManagerSaveException("Произошла ошибка во время записи файла.");
         }
 
     }
 
-    String toString(Task task) {
+    private String toString(Task task) {
         String taskString;
         taskString = String.format("%s,%s,%s,%s,%s,",
                 task.getId(), task.getType(), task.getName(), task.getStatus(), task.getDescription());
@@ -39,7 +40,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         return taskString;
     }
 
-    static String historyToString(HistoryManager manager) {
+    private static String historyToString(HistoryManager manager) {
         StringBuilder historyString = new StringBuilder();
         for (Task task : manager.getHistory()) {
             historyString.append(task.getId() + ",");
@@ -50,7 +51,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         return historyString.toString();
     }
 
-    static Task fromString(String value) {
+    private static Task fromString(String value) {
         Task task = null;
         String[] m = value.split(",");
         if (TypeOfTask.valueOf(m[1]) == TypeOfTask.TASK) {
@@ -65,7 +66,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         return task;
     }
 
-    static List<Integer> historyFromString(String value) {
+    private static List<Integer> historyFromString(String value) {
         List<Integer> historyIdList = new ArrayList<>();
         for (String s : value.split(",")) {
             historyIdList.add(Integer.parseInt(s));
@@ -85,8 +86,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
                 }
             }
         } catch (IOException e) {
-            System.out.println("Произошла ошибка во время чтения файла.");
-            e.printStackTrace();
+            throw new ManagerSaveException("Произошла ошибка во время записи файла.");
         }
         int countTasks;
         boolean isExistHistory = false;
@@ -142,26 +142,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         return id;
     }
 
-    @Override
-    public Task getTaskById(Integer id) {
-        Task task = super.getTaskById(id);
-        save();
-        return task;
-    }
-
-    @Override
-    public Epic getEpicById(Integer id) {
-        Epic epic = super.getEpicById(id);
-        save();
-        return epic;
-    }
-
-    @Override
-    public Subtask getSubtaskById(Integer id) {
-        Subtask subtask = super.getSubtaskById(id);
-        save();
-        return subtask;
-    }
 
     @Override
     public void updateTask(Task task) {

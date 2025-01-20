@@ -47,7 +47,7 @@ public class Task {
         this.description = description;
     }
 
-    public TypeOfTask  getType() {
+    public TypeOfTask getType() {
         return type;
     }
 
@@ -57,12 +57,13 @@ public class Task {
 
     @Override
     public String toString() {
-        return "model.Task{" +
+        return "Task{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
                 ", status='" + status + '\'' +
                 '}';
     }
-
 }
+
+
