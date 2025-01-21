@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FileBackedTasksManager extends InMemoryTaskManager {
 
-    File file;
+     private File file;
 
     public FileBackedTasksManager(File file) {
         this.file = file;
@@ -40,7 +40,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         return taskString;
     }
 
-    private static String historyToString(HistoryManager manager) {
+    private String historyToString(HistoryManager manager) {
         StringBuilder historyString = new StringBuilder();
         for (Task task : manager.getHistory()) {
             historyString.append(task.getId() + ",");
@@ -58,7 +58,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
             task = new Task(Integer.parseInt(m[0]), TypeOfTask.valueOf(m[1]), m[2], StatusOfTask.valueOf(m[3]), m[4]);
         } else if (TypeOfTask.valueOf(m[1]) == TypeOfTask.EPIC) {
             task = new Epic(Integer.parseInt(m[0]), TypeOfTask.valueOf(m[1]), m[2], StatusOfTask.valueOf(m[3]), m[4],
-                    new ArrayList<Integer>());
+                    new ArrayList<>());
         } else if (TypeOfTask.valueOf(m[1]) == TypeOfTask.SUBTASK) {
             task = new Subtask(Integer.parseInt(m[0]), TypeOfTask.valueOf(m[1]), m[2], StatusOfTask.valueOf(m[3]), m[4],
                     Integer.parseInt(m[5]));
