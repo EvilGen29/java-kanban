@@ -1,3 +1,7 @@
+package service;
+
+import model.Task;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -8,7 +12,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     private Node first;
     private Node last;
 
-    Map<Integer,Node> nodes = new HashMap<>();
+    Map<Integer, Node> nodes = new HashMap<>();
 
     private void linkLast(Task task) {
         Node newNode = new Node(last, task, null);

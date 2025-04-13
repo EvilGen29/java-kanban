@@ -1,3 +1,7 @@
+package service;
+
+import model.Task;
+
 public class Node {
     protected Task task;
     protected Node prev;

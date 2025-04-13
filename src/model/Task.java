@@ -1,11 +1,15 @@
+package model;
+
 public class Task {
     protected Integer id;
+    protected TypeOfTask type;
     protected String name;
     protected StatusOfTask status;
     protected String description;
 
-    public Task(Integer id, String name, StatusOfTask status, String description) {
+    public Task(Integer id, TypeOfTask type, String name, StatusOfTask status, String description) {
         this.id = id;
+        this.type = type;
         this.name = name;
         this.status = status;
         this.description = description;
@@ -43,6 +47,14 @@ public class Task {
         this.description = description;
     }
 
+    public TypeOfTask getType() {
+        return type;
+    }
+
+    public void setType(TypeOfTask type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
@@ -52,5 +64,6 @@ public class Task {
                 ", status='" + status + '\'' +
                 '}';
     }
-
 }
+
+
